@@ -3,8 +3,7 @@ package com.phenix.app.book.ui.onboarding;
 import android.os.Bundle;
 
 import com.phenix.app.book.R;
-
-import androidx.appcompat.app.AppCompatActivity;
+import com.phenix.app.book.ui.base.BaseActivity;
 
 /**
  * OnboardingActivity
@@ -12,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author john
  * @since 2020-05-23
  */
-public class OnboardingActivity extends AppCompatActivity {
+public class OnboardingActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

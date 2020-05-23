@@ -3,9 +3,8 @@ package com.phenix.app.book.ui.splash;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.phenix.app.book.ui.base.BaseActivity;
 import com.phenix.app.book.ui.main.MainActivity;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * SplashActivity
@@ -13,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @author john
  * @since 2020-05-23
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
