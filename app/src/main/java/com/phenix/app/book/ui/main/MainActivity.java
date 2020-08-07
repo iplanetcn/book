@@ -5,11 +5,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.phenix.app.book.R;
 import com.phenix.app.book.data.local.entity.BookInfo;
 import com.phenix.app.book.databinding.ActivityMainBinding;
 import com.phenix.app.book.decoration.GridSpaceItemDecoration;
 import com.phenix.app.book.ui.base.BaseActivity;
+import com.phenix.app.book.ui.book.BookDetailActivity;
 import com.phenix.app.book.ui.main.adapter.BookInfoAdapter;
 import com.phenix.app.book.viewmodel.BookInfoViewModel;
 
@@ -17,11 +23,6 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
 
@@ -59,6 +60,10 @@ public class MainActivity extends BaseActivity {
             mData.clear();
             mData.addAll(bookInfoList);
             mAdapter.notifyDataSetChanged();
+        });
+
+        mAdapter.setItemClickListener(bookInfo -> {
+            BookDetailActivity.start(MainActivity.this, bookInfo.isbn);
         });
     }
 

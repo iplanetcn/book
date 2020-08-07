@@ -2,14 +2,14 @@ package com.phenix.app.book.viewmodel;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
 import com.phenix.app.book.data.Repository;
 import com.phenix.app.book.data.local.entity.BookInfo;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 
 /**
  * BookInfoViewModel
@@ -33,5 +33,9 @@ public class BookInfoViewModel extends AndroidViewModel {
 
     public LiveData<List<BookInfo>> getBookInfoList() {
         return mRepository.getBookInfoList(0, 20);
+    }
+
+    public LiveData<BookInfo> getBookInfoByIsbn(String id) {
+        return mRepository.getBookInfoByIsbn(id);
     }
 }

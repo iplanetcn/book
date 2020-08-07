@@ -2,12 +2,12 @@ package com.phenix.app.book.data.local;
 
 import android.content.Context;
 
-import com.phenix.app.book.data.local.dao.BookInfoDao;
-import com.phenix.app.book.data.local.entity.BookInfo;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.phenix.app.book.data.local.dao.BookInfoDao;
+import com.phenix.app.book.data.local.entity.BookInfo;
 
 /**
  * AppDatabase
@@ -26,9 +26,9 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context, AppDatabase.class, "db_book_info")
-                                   .createFromAsset("databases/db_books.db")
-                                   .fallbackToDestructiveMigration()
-                                   .build();
+                            .createFromAsset("databases/db_books.db")
+                            .fallbackToDestructiveMigration()
+                            .build();
                 }
             }
         }

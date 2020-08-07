@@ -3,10 +3,10 @@ package com.phenix.app.book.ui.base;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * BaseActivity

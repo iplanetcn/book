@@ -3,9 +3,9 @@ package com.phenix.app.book.decoration;
 import android.graphics.Rect;
 import android.view.View;
 
-import org.jetbrains.annotations.NotNull;
-
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * SpaceItemDecoration

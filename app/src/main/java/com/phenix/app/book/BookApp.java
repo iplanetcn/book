@@ -3,10 +3,11 @@ package com.phenix.app.book;
 import android.app.Application;
 import android.util.Log;
 
-import com.phenix.app.book.utils.TimeUtils;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.phenix.app.book.utils.TimeUtils;
+
 import timber.log.Timber;
 
 /**
@@ -31,7 +32,9 @@ public class BookApp extends Application {
         }
     }
 
-    /** A tree which logs important information for crash reporting. */
+    /**
+     * A tree which logs important information for crash reporting.
+     */
     private static class CrashReportingTree extends Timber.Tree {
         @Override
         protected void log(int priority, String tag, @NonNull String message, Throwable t) {

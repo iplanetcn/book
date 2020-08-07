@@ -2,13 +2,13 @@ package com.phenix.app.book.data;
 
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
+
 import com.phenix.app.book.data.local.AppDatabase;
 import com.phenix.app.book.data.local.dao.BookInfoDao;
 import com.phenix.app.book.data.local.entity.BookInfo;
 
 import java.util.List;
-
-import androidx.lifecycle.LiveData;
 
 /**
  * Repository
@@ -32,5 +32,9 @@ public class Repository {
 
     public LiveData<List<BookInfo>> getBookInfoList(int page, int size) {
         return mBookInfoDao.getBooks(page, size);
+    }
+
+    public LiveData<BookInfo> getBookInfoByIsbn(String isbn) {
+        return mBookInfoDao.getBookInfoByIsbn(isbn);
     }
 }

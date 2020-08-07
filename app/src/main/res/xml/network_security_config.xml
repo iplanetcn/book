@@ -2,7 +2,7 @@
 <network-security-config>
     <base-config cleartextTrafficPermitted="false" />
 
-    <domain-config>
+    <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">allitebooks.org</domain>
         <trust-anchors>
             <!-- Trust a debug certificate in addition to the system certificates -->

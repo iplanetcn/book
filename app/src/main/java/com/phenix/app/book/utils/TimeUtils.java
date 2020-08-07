@@ -9,7 +9,8 @@ import java.util.Calendar;
  * @since 2020-05-24
  */
 public final class TimeUtils {
-    private TimeUtils() {}
+    private TimeUtils() {
+    }
 
     public static boolean isNight() {
         int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
