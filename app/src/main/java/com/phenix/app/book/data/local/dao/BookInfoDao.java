@@ -1,9 +1,10 @@
-package com.phenix.app.book.data.dao;
+package com.phenix.app.book.data.local.dao;
 
-import com.phenix.app.book.data.model.BookInfo;
+import com.phenix.app.book.data.local.entity.BookInfo;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
@@ -16,8 +17,8 @@ import androidx.room.Query;
 @Dao
 public interface BookInfoDao {
     @Query("SELECT * FROM books_info")
-    List<BookInfo> getAll();
+    LiveData<List<BookInfo>> getAll();
 
     @Query("SELECT * FROM books_info LIMIT :size OFFSET :page")
-    List<BookInfo> getBooks(int page, int size);
+    LiveData<List<BookInfo>> getBooks(int page, int size);
 }

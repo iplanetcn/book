@@ -2,19 +2,28 @@ package com.phenix.app.book.ui.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.phenix.app.book.R;
-import com.phenix.app.book.data.AppDatabase;
+import com.phenix.app.book.data.local.entity.BookInfo;
+import com.phenix.app.book.databinding.ActivityMainBinding;
+import com.phenix.app.book.decoration.GridSpaceItemDecoration;
 import com.phenix.app.book.ui.base.BaseActivity;
+import com.phenix.app.book.ui.main.adapter.BookInfoAdapter;
+import com.phenix.app.book.viewmodel.BookInfoViewModel;
+
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.room.Room;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+
+import static androidx.recyclerview.widget.LinearLayoutManager.VERTICAL;
 
 /**
  * MainActivity
@@ -23,21 +32,34 @@ import androidx.room.Room;
  * @since 2020-05-23
  */
 public class MainActivity extends BaseActivity {
+    private BookInfoAdapter mAdapter;
+    private List<BookInfo> mData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "db_book_info")
-                             .createFromAsset("databases/db_books.db")
-                             .allowMainThreadQueries()
-                             .build();
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        if (db.bookInfoDao().getAll().size() > 0) {
-            TextView msgA = findViewById(R.id.tv_msg);
-            msgA.setText(new Gson().toJson(db.bookInfoDao().getAll().get(0)));
-        } else {
-            Log.d("book_info", "found no books");
-        }
+        mData = new ArrayList<>();
+        mAdapter = new BookInfoAdapter(this, mData);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, VERTICAL, false);
+        binding.recyclerView.setHasFixedSize(true);
+        binding.recyclerView.setAdapter(mAdapter);
+        binding.recyclerView.setLayoutManager(layoutManager);
+        binding.recyclerView.addItemDecoration(new GridSpaceItemDecoration(2, 24, true));
+
+        BookInfoViewModel bookInfoViewModel = new ViewModelProvider(this).get(BookInfoViewModel.class);
+        bookInfoViewModel.getAllBookInfo().observe(this, bookInfoList -> {
+            if (CollectionUtils.isEmpty(bookInfoList)) {
+                showSnackbar("book info list is empty!");
+                return;
+            }
+
+            mData.clear();
+            mData.addAll(bookInfoList);
+            mAdapter.notifyDataSetChanged();
+        });
     }
 
     @Override

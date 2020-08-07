@@ -1,6 +1,9 @@
 package com.phenix.app.book.ui.base;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,5 +18,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    protected void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    protected void showSnackbar(String message) {
+        Snackbar.make(getWindow().getDecorView(), message, Snackbar.LENGTH_SHORT).show();
     }
 }

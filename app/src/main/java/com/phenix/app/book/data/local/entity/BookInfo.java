@@ -1,4 +1,4 @@
-package com.phenix.app.book.data.model;
+package com.phenix.app.book.data.local.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
