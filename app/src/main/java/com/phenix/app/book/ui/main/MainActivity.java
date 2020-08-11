@@ -2,6 +2,8 @@ package com.phenix.app.book.ui.main;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -44,11 +46,11 @@ public class MainActivity extends BaseActivity {
 
         mData = new ArrayList<>();
         mAdapter = new BookInfoAdapter(this, mData);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, VERTICAL, false);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3, VERTICAL, false);
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setAdapter(mAdapter);
         binding.recyclerView.setLayoutManager(layoutManager);
-        binding.recyclerView.addItemDecoration(new GridSpaceItemDecoration(2, 24, true));
+        binding.recyclerView.addItemDecoration(new GridSpaceItemDecoration(3, dp2px(32), true));
 
         BookInfoViewModel bookInfoViewModel = new ViewModelProvider(this).get(BookInfoViewModel.class);
         bookInfoViewModel.getAllBookInfo().observe(this, bookInfoList -> {
@@ -65,6 +67,11 @@ public class MainActivity extends BaseActivity {
         mAdapter.setItemClickListener(bookInfo -> {
             BookDetailActivity.start(MainActivity.this, bookInfo.isbn);
         });
+    }
+
+    private int dp2px(int dp) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
     }
 
     @Override

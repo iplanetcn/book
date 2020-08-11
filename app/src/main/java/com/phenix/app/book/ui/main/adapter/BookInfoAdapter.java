@@ -66,12 +66,9 @@ public class BookInfoAdapter extends RecyclerView.Adapter<BookInfoAdapter.ViewHo
         }
 
         public void bind(BookInfo bookInfo, @Nullable OnBookInfoItemClickListener onItemClickListener) {
-            mBinding.tvTitle.setVisibility(View.VISIBLE);
-            mBinding.tvAuthor.setVisibility(View.VISIBLE);
-            mBinding.ivCover.setVisibility(View.GONE);
-
             mBinding.tvTitle.setText(bookInfo.name);
             mBinding.tvAuthor.setText(bookInfo.author);
+            showCover(false);
 
             Glide.with(mContext)
                     .load(bookInfo.cover)
@@ -79,21 +76,15 @@ public class BookInfoAdapter extends RecyclerView.Adapter<BookInfoAdapter.ViewHo
                         @Override
                         public void onResourceReady(@NonNull Drawable resource,
                                                     @Nullable Transition<? super Drawable> transition) {
-                            mBinding.tvTitle.setVisibility(View.GONE);
-                            mBinding.tvAuthor.setVisibility(View.GONE);
-                            mBinding.ivCover.setVisibility(View.VISIBLE);
-
                             mBinding.ivCover.setBackgroundDrawable(resource);
+                            showCover(true);
                         }
 
                         @Override
                         public void onLoadCleared(@Nullable Drawable placeholder) {
-                            mBinding.tvTitle.setVisibility(View.VISIBLE);
-                            mBinding.tvAuthor.setVisibility(View.VISIBLE);
-                            mBinding.ivCover.setVisibility(View.GONE);
-
                             mBinding.tvTitle.setText(bookInfo.name);
                             mBinding.tvAuthor.setText(bookInfo.author);
+                            showCover(false);
                         }
                     });
 
@@ -102,6 +93,12 @@ public class BookInfoAdapter extends RecyclerView.Adapter<BookInfoAdapter.ViewHo
                     onItemClickListener.onItemClick(bookInfo);
                 }
             });
+        }
+
+        private void showCover(boolean show) {
+            mBinding.tvTitle.setVisibility(show ? View.GONE : View.VISIBLE);
+            mBinding.tvAuthor.setVisibility(show ? View.GONE : View.VISIBLE);
+            mBinding.ivCover.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }
 }
